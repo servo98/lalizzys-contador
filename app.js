@@ -145,7 +145,7 @@ const startApp = () => {
     const bitsCounts = +userstate['bits'];
     const sumTotal = isPair(bitsCounts) ? -bitsCounts : +bitsCounts;
     changeRemain(remainSeconds + sumTotal * SECONDS_PER_BIT);
-    console.log(
+    sendToDiscord(
       `${userstate['display-name']} agregó ${
         sumTotal * SECONDS_PER_BIT
       } al tiempo por ${userstate['bits']} bits: ${message}`
@@ -172,7 +172,7 @@ const startApp = () => {
 
     changeRemain(remainSeconds + totalSum);
 
-    console.log(`${username} ha sumado ${totalSum} con su primera sub`);
+    sendToDiscord(`${username} ha sumado ${totalSum} con su primera sub`);
   });
 
   client.on(
@@ -197,7 +197,7 @@ const startApp = () => {
 
       changeRemain(remainSeconds + totalSum);
 
-      console.log(`${username} ha sumado ${totalSum} con una resub`);
+      sendToDiscord(`${username} ha sumado ${totalSum} con una resub`);
     }
   );
 
@@ -224,12 +224,12 @@ const startApp = () => {
       }
       if (isPair(giftCount)) {
         changeRemain(remainSeconds - sumTotal);
-        console.log(
+        sendToDiscord(
           `${username} ha sumado ${sumTotal} regalando ${giftCount} subs`
         );
       } else {
         changeRemain(remainSeconds + sumTotal);
-        console.log(
+        sendToDiscord(
           `${username} ha restado ${sumTotal} regalando ${giftCount} subs`
         );
       }
@@ -258,12 +258,12 @@ const startApp = () => {
       }
       if (isPair(giftCount)) {
         changeRemain(remainSeconds - sumTotal);
-        console.log(
+        sendToDiscord(
           `Anónimo ha sumado ${sumTotal} regalando ${giftCount} subs`
         );
       } else {
         changeRemain(remainSeconds + sumTotal);
-        console.log(
+        sendToDiscord(
           `Anónimo ha restado ${sumTotal} regalando ${giftCount} subs`
         );
       }
@@ -274,17 +274,43 @@ const startApp = () => {
 };
 
 connectButton.onclick = startApp;
-// const testButton = document.getElementById('test');
+const testButton = document.getElementById('test');
 
-// testButton.onclick = () => {
-//   simulateCheer(100, 'mensaje prueba');
-// };
+testButton.onclick = () => {
+  simulateCheer(100, 'mensaje prueba');
+};
 
-// function simulateCheer(bits, message) {
-//   const simulatedUserState = {
-//     'display-name': 'SimulatedUser',
-//     bits: bits,
-//   };
+function sendToDiscord(text) {
+  const data = {
+    content: text,
+  };
 
-//   client.emit('cheer', 'nombre_del_canal', simulatedUserState, message);
-// }
+  fetch(
+    'https://discord.com/api/webhooks/1253968314640891924/cgkqARHOrly1nR32dnjQVjUNUX7jyiHq7sclcDORj5zexnIC4ONKYq-XzjigQgsH1N0N',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }
+  )
+    .then((response) => {
+      if (response.ok) {
+        console.log('Mensaje enviado correctamente mediante webhook');
+      } else {
+        console.error(
+          'Error al enviar el mensaje mediante webhook:',
+          response.statusText
+        );
+      }
+    })
+    .catch((error) => {
+      console.error(
+        'Error inesperado al enviar el mensaje mediante webhook:',
+        error
+      );
+    });
+}
+
+function simulateCheer(bits, message) {}
