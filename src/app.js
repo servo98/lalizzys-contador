@@ -1,4 +1,7 @@
 import tmi from 'tmi.js';
+import { init } from './spin';
+
+init();
 
 const containerDiv = document.getElementById('container');
 const tokenInput = document.getElementById('token');
@@ -40,6 +43,7 @@ const resumeButton = document.getElementById('resume');
 const sumarButton = document.getElementById('sumar');
 const restarButton = document.getElementById('restar');
 const cambiarInput = document.getElementById('cambiar');
+const tokenContainer = document.getElementById('tokenContainer');
 
 let remainSeconds = 0;
 contador.innerText = secondsToHms(remainSeconds);
@@ -124,8 +128,10 @@ const startApp = () => {
   if (token == '') {
     return;
   }
+  iniciar.disabled = false;
+  tokenContainer.style.display = 'none';
   tokenInput.value = '';
-  containerDiv.style.display = 'block';
+  // containerDiv.style.display = 'block';
   client = new tmi.Client({
     options: {
       debug: false,

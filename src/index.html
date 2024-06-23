@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contador de lalizzys</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      #contador {
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        font-family: 'M PLUS 1p', sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        padding: 20px 40px; /* Espaciado interno aumentado */
+        /* background-color: #3498db; */
+        color: #fff;
+        border-radius: 12px; /* Bordes redondeados aumentados */
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <span id="contador" style="font-size: 50px"></span>
+      <div
+        id="wheel"
+        style="width: 500px; height: 500px; border: solid 3"
+      ></div>
+      <div id="tokenContainer">
+        TOKEN <input type="text" id="token" />
+        <button id="connect">CONNECT</button>
+      </div>
+      <br />
+      <button id="start" disabled>START</button>
+      <button id="pause" disabled>PAUSA</button>
+      <button id="resume" disabled>PLAY</button>
+      <br />
+      horas: <input type="number" value="0" id="hours" />
+      <br />
+      minutos: <input type="number" value="0" id="minutes" />
+      <br />
+      segundos: <input type="number" value="0" id="seconds" />
+      <br />
+      <br />
+      <button id="restar">-</button
+      ><input type="number" id="cambiar" min="0" /><button id="sumar">+</button>
+    </div>
+    <button id="spin">SPIN</button>
+    <br />
+    <br />
+    <select id="testType"></select>
+    <button id="test">TEST</button>
+    <br />
+    <br />
+    <br />
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
